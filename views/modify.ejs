@@ -4,36 +4,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit Blog</title>
+  <title>Edit Blog - Lekhak.com</title>
   <link rel="stylesheet" href="/styles/main.css">
 </head>
 
 <body>
   <div class="container">
-    <h1>
-      <%= heading %>
-    </h1>
+    <header>
+      <h1><%= heading %></h1>
+    </header>
 
-    <% if (locals.post) { %>
-      <form id="editForm" method="post" action="/api/posts/<%=post.id%>">
-        <input type="text" name="title" value="<%=post.title %>">
-        <textarea name="content" rows="10"><%=post.content %></textarea>
-        <input type="text" name="author" value="<%=post.author %>">
-        <button class="full-width" type="submit">
-          <%= submit %>
-        </button>
-      </form>
-      <% } else {%>
-        <form id="newPostForm" method="post" action="/api/posts">
-          <input type="text" name="title" placeholder="Title" required>
-          <textarea name="content" placeholder="Content" required rows="10"></textarea>
-          <input type="text" name="author" placeholder="Author" required>
-          <button class="full-width" type="submit">
-            <%= submit %>
-          </button>
+    <main>
+      <% if (locals.post) { %>
+        <form id="editForm" method="POST" action="/api/posts/<%= post.id %>">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" value="<%= post.title %>" required>
+
+          <label for="content">Content</label>
+          <textarea id="content" name="content" rows="10" required><%= post.content %></textarea>
+
+          <label for="author">Author</label>
+          <input type="text" id="author" name="author" value="<%= post.author %>" required>
+
+          <button class="full-width" type="submit"><%= submit %></button>
         </form>
-        <% } %>
 
+      <% } else { %>
+        <form id="newPostForm" method="POST" action="/api/posts">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" placeholder="Enter title" required>
+
+          <label for="content">Content</label>
+          <textarea id="content" name="content" placeholder="Write your blog post..." rows="10" required></textarea>
+
+          <label for="author">Author</label>
+          <input type="text" id="author" name="author" placeholder="Your name" required>
+
+          <button class="full-width" type="submit"><%= submit %></button>
+        </form>
+      <% } %>
+    </main>
   </div>
 </body>
 
